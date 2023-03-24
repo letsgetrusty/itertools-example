@@ -13,11 +13,11 @@ fn main() {
     let log2 = read_lines("./apache_2.log").unwrap();
 
     let log1 = log1.filter_map(|l| {
-        TryInto::<ApacheLogEntry>::try_into(l.ok()?.as_ref()).ok()
+        ApacheLogEntry::try_from(l.ok()?.as_ref()).ok()
     });
 
     let log2 = log2.filter_map(|l| {
-        TryInto::<ApacheLogEntry>::try_into(l.ok()?.as_ref()).ok()
+        ApacheLogEntry::try_from(l.ok()?.as_ref()).ok()
     });
 
     let log_final = log1.merge(log2).unique().sorted().collect_vec();
